@@ -1,6 +1,4 @@
 # Experiment 6: Joins
-## Name: KUMARAN N
-## Reg.No: 212224060130
 
 ## AIM
 To study and implement different types of joins.
@@ -56,224 +54,157 @@ ON table1.column = table2.column;
 
 **Question 1**
 --
-![image](https://github.com/user-attachments/assets/6a7d531f-ab7a-4676-a915-51cf6a349ce5)
+<img width="1250" height="713" alt="image" src="https://github.com/user-attachments/assets/6d016414-ccb1-4d07-9d68-38bf9ceac1a2" />
+
 
 ```sql
-SELECT 
-    customer.cust_name AS "Customer Name", 
-    customer.city AS "city", 
-    salesman.name AS "Salesman", 
-    salesman.commission
-FROM 
-    customer
-JOIN 
-    salesman
-ON 
-    customer.salesman_id = salesman.salesman_id
-WHERE 
-    salesman.commission > 0.12;
+select p.* from patients p inner join test_results t on p.patient_id=t.patient_id 
+where t.test_name in ('Blood Test', 'Blood Pressure') and t.result not like '%Normal%';
 ```
 
 **Output:**
 
-![image](https://github.com/user-attachments/assets/17930339-1ff8-4711-a2b1-f114420b8203)
+<img width="1284" height="495" alt="image" src="https://github.com/user-attachments/assets/4ac4fd3c-e04c-47a4-bbe9-a1da79bd0974" />
+
 
 **Question 2**
 ---
-![image](https://github.com/user-attachments/assets/d3242b2e-3391-4cb3-a605-416836846233)
+<img width="1229" height="500" alt="image" src="https://github.com/user-attachments/assets/5648c1b3-93e7-44df-933a-91b769c4ed67" />
+
 
 ```sql
-SELECT 
-    patients.date_of_birth, 
-    appointments.*
-FROM 
-    patients
-JOIN 
-    appointments
-ON 
-    patients.patient_id = appointments.patient_id
-WHERE 
-    patients.first_name = 'Alice';
+select s.name, c.cust_name, c.city, c.grade, c.salesman_id from salesman s left join customer c on s.salesman_id=c.salesman_id;
+
 ```
 
 **Output:**
 
-![image](https://github.com/user-attachments/assets/f39c1ec5-21f6-490f-97fa-aa19952d99b8)
+<img width="1243" height="837" alt="image" src="https://github.com/user-attachments/assets/d757e5c7-5331-4d19-8993-a8e3c34f8739" />
+
 
 **Question 3**
 ---
-![image](https://github.com/user-attachments/assets/097557ad-6d0d-4e7c-b56e-8bff11cd916f)
+<img width="1253" height="614" alt="image" src="https://github.com/user-attachments/assets/5deac82f-5e18-4c2c-8ff2-e00805c72d81" />
+
 
 ```sql
-SELECT 
-    orders.ord_no, 
-    orders.ord_date, 
-    orders.purch_amt, 
-    customer.cust_name AS "Customer Name", 
-    customer.grade, 
-    salesman.name AS "Salesman", 
-    salesman.commission
-FROM 
-    orders
-JOIN 
-    customer ON orders.customer_id = customer.customer_id
-JOIN 
-    salesman ON orders.salesman_id = salesman.salesman_id;
+select c.cust_name as "Customer Name", c.city, s.name as "Salesman", s.commission from customer c inner join salesman s on c.salesman_id=s.salesman_id;
 ```
 
 **Output:**
 
-![image](https://github.com/user-attachments/assets/1bb423b5-b96f-453c-8285-9846debb43d7)
+<img width="1277" height="844" alt="image" src="https://github.com/user-attachments/assets/b1c21bdf-200a-4c3e-a9b6-00988bb4fa41" />
+
 
 **Question 4**
 ---
-![image](https://github.com/user-attachments/assets/cc381617-fa50-4692-96e2-8bffba32000c)
+<img width="1250" height="775" alt="image" src="https://github.com/user-attachments/assets/ca20ce3c-e652-4116-bc0c-a9eb8073c1bd" />
+<img width="1278" height="712" alt="image" src="https://github.com/user-attachments/assets/9be1dee6-e9c8-4f9f-ae9d-c9cef14cc95b" />
+
 
 ```sql
-SELECT 
-    customer.cust_name, 
-    customer.city, 
-    customer.grade, 
-    salesman.name AS "Salesman", 
-    salesman.city AS "city"
-FROM 
-    customer
-JOIN 
-    salesman ON customer.salesman_id = salesman.salesman_id
-WHERE 
-    customer.grade < 300
-ORDER BY 
-    customer.customer_id ASC;
+select o.ord_no, o.purch_amt, o.ord_date, c.cust_name, c.city as "customer_city", c.grade, s.name as "salesman_name", s.city as "salesman_city", commission
+from orders o
+inner join customer c on o.customer_id=c.customer_id
+inner join salesman s on o.salesman_id=s.salesman_id;
 ```
 
 **Output:**
 
-![image](https://github.com/user-attachments/assets/d0cfb6e4-ef2e-43e5-b0e9-5a2874ba62b7)
+<img width="1274" height="785" alt="image" src="https://github.com/user-attachments/assets/ea9541e7-7533-42bc-a011-747dfdee8e4f" />
+
 
 **Question 5**
 ---
-![image](https://github.com/user-attachments/assets/64fc32f2-45b3-4f9d-9954-cb543e52f9a4)
+<img width="1269" height="395" alt="image" src="https://github.com/user-attachments/assets/c0075705-9f1a-4a80-8e37-d49711aac330" />
+
 
 ```sql
-SELECT 
-    s.name
-FROM 
-    salesman AS s
-LEFT JOIN 
-    customer AS c ON s.salesman_id = c.salesman_id
-WHERE 
-    c.city = 'London';
+select c.* from customer c left join orders o on c.customer_id=o.customer_id where o.ord_date between '2012-08-01' and '2012-08-30';
 ```
 
 **Output:**
 
-![image](https://github.com/user-attachments/assets/6d8fbe7c-6d7e-4108-a9d9-4f40df26eadd)
+<img width="1267" height="563" alt="image" src="https://github.com/user-attachments/assets/f6c4e336-9b32-448f-9711-7cbf96a085f4" />
+
 
 **Question 6**
 ---
-![image](https://github.com/user-attachments/assets/3676007b-6cbb-4aaa-be38-be3b7490a343)
+<img width="1247" height="778" alt="image" src="https://github.com/user-attachments/assets/239d5903-8620-4372-a5e1-5495d32ad572" />
+
 
 ```sql
-SELECT 
-    c.cust_name
-FROM 
-    customer AS c
-LEFT JOIN 
-    orders AS o ON c.customer_id = o.customer_id;
+select p.first_name, p.last_name from patients p inner join surgeries s on p.patient_id=s.patient_id where s.surgery_date between  '2024-01-01' and '2024-01-31';
 ```
 
 **Output:**
 
-![image](https://github.com/user-attachments/assets/04dc1a46-1a8c-434a-ba1b-0a2ec097d8de)
+<img width="769" height="469" alt="image" src="https://github.com/user-attachments/assets/a9170fd4-5b09-4881-ab95-a0ae159c4cd7" />
+
 
 **Question 7**
 ---
-![image](https://github.com/user-attachments/assets/975eee13-6675-4d54-b674-ec9078a29105)
+<img width="1235" height="768" alt="image" src="https://github.com/user-attachments/assets/d14d8c6a-b799-48bf-b888-79dc705d5e9a" />
 
 ```sql
-SELECT 
-    p.first_name AS patient_name, 
-    t.*
-FROM 
-    patients AS p
-INNER JOIN 
-    test_results AS t ON p.patient_id = t.patient_id;
+select o.ord_no, o.purch_amt, c.cust_name, c.city from orders o inner join customer c on o.customer_id=c.customer_id where o.purch_amt between 500 and 2000;
 ```
 
 **Output:**
 
-![image](https://github.com/user-attachments/assets/67823836-4e83-4be1-a1ae-a33de5189991)
+<img width="1271" height="568" alt="image" src="https://github.com/user-attachments/assets/317f5190-fff1-43db-9c9d-7bf0a76bdd34" />
+
 
 **Question 8**
 ---
-![image](https://github.com/user-attachments/assets/2cd468b9-1846-4cad-a2ae-49cfc5db6f79)
+<img width="1252" height="811" alt="image" src="https://github.com/user-attachments/assets/c9f86786-2bfe-45ad-a4ca-e8cc5e9b9dba" />
+
 
 ```sql
-SELECT 
-    c.cust_name, 
-    c.city AS city, 
-    c.grade, 
-    s.name AS Salesman, 
-    s.city AS city
-FROM 
-    customer c
-LEFT JOIN 
-    salesman s 
-ON 
-    c.salesman_id = s.salesman_id
-ORDER BY 
-    c.customer_id ASC;
+select p.*, d.specialization as "doctor_specialization" from patients p inner join doctors d on p.doctor_id=d.doctor_id;
 ```
 
 **Output:**
 
-![image](https://github.com/user-attachments/assets/71369dc3-8140-495d-bfd5-3528da1c1715)
+<img width="1266" height="650" alt="image" src="https://github.com/user-attachments/assets/279cb0cf-3389-4e22-a1aa-bb63d1068840" />
+
 
 **Question 9**
 ---
-![image](https://github.com/user-attachments/assets/1c055a9f-cf86-4140-8ae1-0578c3d74740)
+<img width="1224" height="780" alt="image" src="https://github.com/user-attachments/assets/69b703b4-db62-4918-a649-a50e36299a0c" />
+<img width="1050" height="725" alt="image" src="https://github.com/user-attachments/assets/dcabdfdf-bdc1-4feb-9d7b-258555302c11" />
+
 
 ```sql
-SELECT 
-    p.admission_date, 
-    s.surgery_date
-FROM 
-    patients p
-INNER JOIN 
-    surgeries s 
-ON 
-    p.patient_id = s.patient_id;
+select o.ord_no, o.ord_date, o.purch_amt, c.cust_name as "Customer Name", c.grade, s.name as "Salesman", s.commission 
+from orders o
+inner join customer c on o.customer_id=c.customer_id
+inner join salesman s on o.salesman_id=s.salesman_id;
 ```
 
 **Output:**
 
-![image](https://github.com/user-attachments/assets/7a9059e3-1ca2-43bc-9473-ff3cd0245120)
+<img width="1303" height="788" alt="image" src="https://github.com/user-attachments/assets/75751c04-35f2-44fc-bf29-618048bd8247" />
+
 
 **Question 10**
 ---
-![image](https://github.com/user-attachments/assets/6e570580-23be-4f6e-86db-1f7a43afc23c)
+<img width="1211" height="755" alt="image" src="https://github.com/user-attachments/assets/a5cf3d31-bc05-4201-864d-c341f683c00d" />
+<img width="1002" height="709" alt="image" src="https://github.com/user-attachments/assets/3dc737c0-4b39-47cd-b5cc-ad371b32ce76" />
+
 
 ```sql
-SELECT 
-    c.cust_name AS "Customer Name", 
-    c.city, 
-    s.name AS "Salesman", 
-    s.commission
-FROM 
-    customer c
-JOIN 
-    salesman s 
-ON 
-    c.salesman_id = s.salesman_id;
+select c.cust_name, c.city, o.ord_no, o.ord_date, o.purch_amt as "Order Amount", s.name, s.commission 
+from customer c 
+left join orders o on c.customer_id=o.customer_id
+left join salesman s on c.salesman_id=s.salesman_id;
 ```
 
 **Output:**
 
-![image](https://github.com/user-attachments/assets/f2ed3a8d-50ee-4576-b936-9dfde3589de2)
+<img width="1276" height="790" alt="image" src="https://github.com/user-attachments/assets/f01d9a80-a0e7-4031-886b-4cdea54595e6" />
+
+
 
 ## RESULT
 Thus, the SQL queries to implement different types of joins have been executed successfully.
-
-## Module 5 Score
-
-<img width="1165" height="93" alt="image" src="https://github.com/user-attachments/assets/888b3119-125b-4b52-aa2f-6affe9b41e65" />
