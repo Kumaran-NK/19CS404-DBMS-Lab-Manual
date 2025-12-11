@@ -219,7 +219,7 @@ LastName TEXT NOT NULL,
 Email TEXT UNIQUE,
 Salary INTEGER CHECK (Salary>0),
 DepartmentID INTEGER,
-FOREIGN KEY (DepartmentID)REFERENCES Departments
+FOREIGN KEY (DepartmentID)REFERENCES Departments(DepartmentID)
 );
 ```
 
