@@ -113,7 +113,7 @@ Create a table named Attendance with the following constraints:
 
 ```sql
 CREATE TABLE Attendance(
-AttendanceID INTEGER, 
+AttendanceID INTEGER PRIMARY KEY, 
 EmployeeID INTEGER,
 AttendanceDate DATE,
 Status TEXT CHECK(Status IN('Present','Absent','Leave')),
